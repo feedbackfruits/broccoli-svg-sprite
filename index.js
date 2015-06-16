@@ -29,21 +29,31 @@ function writeSVGSpriteToDir(spriter) {
 }
 module.exports = CachingWriter.extend({
     init: function(inputTrees, options) {
-        var _options = options || {};
-        if (Array.isArray(inputTrees)) {
+        
+        if((!inputTrees) || (!options) || (!inputTrees.srcDir))
+            throw new Error('srcFiles/srcDir or svgOptions cannot be empty. Please specify source files and svgOptions.');
+
+
+        var _options = {};
+        _options.filterFromCache = {};
+        _options.svgOptions = options;
+
+        if (Array.isArray(inputTrees.srcDir)) {
             throw new Error('You passed an array of input trees, but only a single tree is allowed.');
         }
-        if ((_options) && (_options.filterFromCache) && (_options.filterFromCache.include) && (_options.filterFromCache.include.length > 0)) {
-            _options.filterFromCache.includeGlob = _options.filterFromCache.include;
-            _options.filterFromCache.include = [globToRegExp(_options.filterFromCache.include)];
+        if ((_options) && (_options.include) && (_options.include.length > 0)) {
+            _options.filterFromCache.includeGlob = _options.include;
+            _options.filterFromCache.include = [globToRegExp(_options.include)];
         }
-        if ((_options) && (_options.filterFromCache) && (_options.filterFromCache.exclude) && (_options.filterFromCache.exclude.length > 0)) {
-            _options.filterFromCache.excludeGlob = _options.filterFromCache.exclude;
-            _options.filterFromCache.exclude = [globToRegExp(_options.filterFromCache.exclude)];
+        if ((_options) && (_options.exclude) && (_options.exclude.length > 0)) {
+            _options.filterFromCache.excludeGlob = _options.exclude;
+            _options.filterFromCache.exclude = [globToRegExp(_options.exclude)];
         }
-        CachingWriter.prototype.init.call(this, inputTrees, _options);
+        CachingWriter.prototype.init.call(this, inputTrees.srcDir, _options);
+
     },
     updateCache: function(srcPaths, destDir) {
+        console.log('updateCache called');
         if (this.svgOptions)
             this.svgOptions.dest = destDir;
         var svgSpriter = new Spriter(this.svgOptions);
