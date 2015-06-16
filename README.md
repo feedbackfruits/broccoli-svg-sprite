@@ -1,4 +1,4 @@
-broccoli-svg-sprite
+#broccoli-svg-sprite
 
 The broccoli-svg-sprite plugin provides a wrapper around node.js svg-sprite module which takes a set of svg files, optimizes them and combines them into SVG sprites of several types
 
@@ -84,5 +84,6 @@ module.exports = mergeTree[app.toTree(), spriter];
 #To do
 
 Add tests.
+Add Travis ci configuration
 
 
