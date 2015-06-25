@@ -1,4 +1,5 @@
 var CachingWriter = require('broccoli-caching-writer');
+var stew
 var Spriter = require('svg-sprite');
 var path = require('path');
 var fs = require('fs');
@@ -8,6 +9,10 @@ var globToRegExp = require('glob-to-regexp');
 var mkdirp = require('mkdirp');
 var RSVP = require('rsvp');
 function getFilesForSourceDirectory(sourceDirectory, includePattern, excludePattern) {
+    console.log('Resolving files from directory ');
+    console.log(sourceDirectory);
+    console.log(includePattern);
+    console.log(excludePattern);
     return globber.sync(includePattern, {
         cwd: sourceDirectory,
         root: path.resolve(sourceDirectory),
@@ -24,52 +29,42 @@ function addFilesToSprite(spriter, sourceDirectory, fileSpec) {
         contents: fs.readFileSync(path.join(absolutePath, fileSpec))
     }));
 }
-function writeSVGSpriteToDir(spriter) {
-    spriter.compile(writeSVGFiles);
-}
 module.exports = CachingWriter.extend({
     init: function(inputTrees, options) {
         
-        if((!inputTrees) || (!options) || (!inputTrees.srcDir))
+        if ((!inputTrees) || (!options) || (!inputTrees.srcDir))
             throw new Error('srcFiles/srcDir or svgOptions cannot be empty. Please specify source files and svgOptions.');
-
-
         var _options = {};
         _options.filterFromCache = {};
         _options.svgOptions = options;
-
         if (Array.isArray(inputTrees.srcDir)) {
             throw new Error('You passed an array of input trees, but only a single tree is allowed.');
         }
-        if ((_options) && (_options.include) && (_options.include.length > 0)) {
-            _options.filterFromCache.includeGlob = _options.include;
-            _options.filterFromCache.include = [globToRegExp(_options.include)];
+        if ((inputTrees) && (inputTrees.include) && (inputTrees.include.length > 0)) {
+            _options.filterFromCache.includeGlob = inputTrees.include;
+            _options.filterFromCache.include = [globToRegExp(inputTrees.include)];
         }
-        if ((_options) && (_options.exclude) && (_options.exclude.length > 0)) {
-            _options.filterFromCache.excludeGlob = _options.exclude;
-            _options.filterFromCache.exclude = [globToRegExp(_options.exclude)];
+        if ((inputTrees) && (inputTrees.exclude) && (inputTrees.exclude.length > 0)) {
+            _options.filterFromCache.excludeGlob = inputTrees.exclude;
+            _options.filterFromCache.exclude = [globToRegExp(inputTrees.exclude)];
         }
         CachingWriter.prototype.init.call(this, inputTrees.srcDir, _options);
-
     },
     updateCache: function(srcPaths, destDir) {
-        console.log('updateCache called');
+        
         if (this.svgOptions)
             this.svgOptions.dest = destDir;
+        
         var svgSpriter = new Spriter(this.svgOptions);
         if ((Array.isArray(srcPaths)) && (srcPaths.length > 0))
             sourceDirectory = srcPaths[0];
         else
             sourceDirectory = srcPaths;
+        console.log(this);
         getFilesForSourceDirectory(sourceDirectory, this.filterFromCache.includeGlob, this.filterFromCache.excludeGlob).forEach(function(fileSpec) {
+
             addFilesToSprite(svgSpriter, sourceDirectory, fileSpec);
         });
-        var done = false;
-        svgSpriter.on('compiled', function() {
-            done = true;
-        });
-        //We need some form of synchronization here. Must stop this method from returning immediately.
-        var async = this.async();
         return new RSVP.Promise(function(resolve, reject) {
             svgSpriter.compile(function(error, result, data) {
                 if (error)
@@ -77,9 +72,6 @@ module.exports = CachingWriter.extend({
                 for (var mode in result) {
                     for (var resource in result[mode]) {
                         var file = result[mode][resource];
-                        //Now check for resource type and save it in the right folder
-                        //Add the directory to unwatched tree to prevent re-retriggering.
-                        //var unwatechedTree = new UnwatchedTree(path.dirname(file.path));
                         mkdirp.sync(path.dirname(file.path));
                         fs.writeFileSync(file.path, file.contents);
                     }

@@ -47,12 +47,27 @@
   "homepage": "https://github.com/MojoJojo/broccoli-svg-sprite",
   "devDependencies": {
     "broccoli-caching-writer": "^0.5.5",
+    "coveralls": "*",
     "glob-array": "^0.1.2",
     "glob-to-regexp": "0.0.2",
+    "gulp-util": "^3.0.5",
+    "image-diff": "^1.0.3",
+    "istanbul": "*",
+    "jshint": "^2.8.0",
+    "less": "^2.5.1",
     "mkdirp": "^0.5.1",
+    "mocha": "",
+    "mocha-lcov-reporter": "*",
+    "node-sass": "^3.2.0",
     "path": "^0.11.14",
+    "rimraf": "",
     "rsvp": "^3.0.18",
+    "should": "^7.0.1",
+    "stylus": "^0.51.1",
     "svg-sprite": "^1.2.3",
-    "vinyl": "^0.5.0"
+    "svg2png": "^1.1.1",
+    "vinyl": "^0.5.0",
+    "vinyl-fs": "^1.0.0",
+    "walk-sync": "^0.1.3"
   }
 }
