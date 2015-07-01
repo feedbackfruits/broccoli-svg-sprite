@@ -57,10 +57,8 @@
         "rsvp": "^3.0.18",
         "stylus": "^0.51.1",
         "svg-sprite": "^1.2.3",
-        "vinyl": "^0.5.0",
+        "vinyl": "^0.5.0"
         
-
-
     },
     "devDependencies": {
         "broccoli-caching-writer": "^0.5.5",
