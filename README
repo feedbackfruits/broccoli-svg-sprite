@@ -81,8 +81,10 @@ module.exports = mergeTree[app.toTree(), spriter];
 ```
 
 
-#To do
+#Tests
+```
+mocha test
 
-Add tests.
+```
 
 
