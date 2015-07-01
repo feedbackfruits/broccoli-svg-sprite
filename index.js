@@ -11,7 +11,7 @@ function getFilesForSourceDirectory(sourceDirectory, includePattern, excludePatt
     return globber.sync(includePattern, {
         cwd: sourceDirectory,
         root: path.resolve(sourceDirectory),
-        debug: true,
+        debug: false,
         nodir: true,
         ignore: excludePattern,
     });
