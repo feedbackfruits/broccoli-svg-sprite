@@ -4,12 +4,12 @@ The broccoli-svg-sprite plugin provides a wrapper around node.js svg-sprite modu
 
 
 
-#Installation
+# Installation
 
 npm install --save-dev broccoli-svg-sprite
 
 
-#Usage
+# Usage
 
 The broccoli-svg-sprite plugin is just a wrapper around the svg-sprite module. To use the plugin in your broccoli project, first import the plugin into your project:
 
@@ -35,7 +35,7 @@ spriteOptions: is a data object that will be passed as such to the svg-sprite mo
 ```
 
 
-#Example:
+# Example:
 
 ```
 var svgSpriter = new spriter(srcFiles, spriteOptions);
@@ -81,10 +81,16 @@ module.exports = mergeTree[app.toTree(), spriter];
 ```
 
 
-#Tests
+# Tests
 ```
+npm install
 mocha test
 
 ```
+# Acknowledgements
+* Joschi Kuphal (https://github.com/jkphl/svg-sprite)
+* Robert Jackson https://github.com/rwjblue
+* Jo Liss (https://github.com/joliss)
+
 
 
