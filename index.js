@@ -1,5 +1,4 @@
 var CachingWriter = require('broccoli-caching-writer');
-var stew
 var Spriter = require('svg-sprite');
 var path = require('path');
 var fs = require('fs');
@@ -9,10 +8,6 @@ var globToRegExp = require('glob-to-regexp');
 var mkdirp = require('mkdirp');
 var RSVP = require('rsvp');
 function getFilesForSourceDirectory(sourceDirectory, includePattern, excludePattern) {
-    console.log('Resolving files from directory ');
-    console.log(sourceDirectory);
-    console.log(includePattern);
-    console.log(excludePattern);
     return globber.sync(includePattern, {
         cwd: sourceDirectory,
         root: path.resolve(sourceDirectory),
@@ -31,7 +26,6 @@ function addFilesToSprite(spriter, sourceDirectory, fileSpec) {
 }
 module.exports = CachingWriter.extend({
     init: function(inputTrees, options) {
-        
         if ((!inputTrees) || (!options) || (!inputTrees.srcDir))
             throw new Error('srcFiles/srcDir or svgOptions cannot be empty. Please specify source files and svgOptions.');
         var _options = {};
@@ -51,18 +45,14 @@ module.exports = CachingWriter.extend({
         CachingWriter.prototype.init.call(this, inputTrees.srcDir, _options);
     },
     updateCache: function(srcPaths, destDir) {
-        
         if (this.svgOptions)
             this.svgOptions.dest = destDir;
-        
         var svgSpriter = new Spriter(this.svgOptions);
         if ((Array.isArray(srcPaths)) && (srcPaths.length > 0))
             sourceDirectory = srcPaths[0];
         else
             sourceDirectory = srcPaths;
-        console.log(this);
         getFilesForSourceDirectory(sourceDirectory, this.filterFromCache.includeGlob, this.filterFromCache.excludeGlob).forEach(function(fileSpec) {
-
             addFilesToSprite(svgSpriter, sourceDirectory, fileSpec);
         });
         return new RSVP.Promise(function(resolve, reject) {
