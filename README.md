@@ -1,4 +1,4 @@
-# broccoli-svg-sprite
+# broccoli-svg-sprite ![Build Status](https://travis-ci.org/MojoJojo/broccoli-svg-sprite.svg?branch=master)
 
 The broccoli-svg-sprite plugin provides a wrapper around node.js svg-sprite module which takes a set of svg files, optimizes them and combines them into SVG sprites of several types
 
