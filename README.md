@@ -81,7 +81,7 @@ var svgOptions = {
 
 var spriter = new svgSpriter(srcFiles, svgOptions);
 
-module.exports = mergeTree[app.toTree(), spriter];
+module.exports = mergeTree([app.toTree(), spriter]);
 ```
 
 
