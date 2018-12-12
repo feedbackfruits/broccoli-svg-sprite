@@ -1,6 +1,6 @@
 {
   "name": "broccoli-svg-sprite",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A broccoli.js plugin for generating svg sprites using node.js svg-sprite module by Joschi Kuphal (https://github.com/jkphl/svg-sprite)",
   "main": "index.js",
   "scripts": {
