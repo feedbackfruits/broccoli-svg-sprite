@@ -1,5 +1,5 @@
 {
-  "name": "broccoli-svg-sprite",
+  "name": "@feedbackfruits/broccoli-svg-sprite",
   "version": "1.1.0",
   "description": "A broccoli.js plugin for generating svg sprites using node.js svg-sprite module by Joschi Kuphal (https://github.com/jkphl/svg-sprite)",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:feedbackfruits/broccoli-svg-sprite.git"
+    "url": "git+ssh://git@github.com/feedbackfruits/broccoli-svg-sprite.git"
   },
   "keywords": [
     "broccoli-plugin",
