@@ -1,12 +1,10 @@
 var CachingWriter = require('broccoli-caching-writer');
-var Spriter = require('svg-sprite');
+var SVGSpriter = require('svg-sprite');
 var path = require('path');
 var fs = require('fs');
 var File = require('vinyl');
 var globber = require('glob-array');
 var globToRegExp = require('glob-to-regexp');
-var mkdirp = require('mkdirp');
-var RSVP = require('rsvp');
 function getFilesForSourceDirectory(sourceDirectory, includePattern, excludePattern) {
     return globber.sync(includePattern, {
         cwd: sourceDirectory,
@@ -50,7 +48,7 @@ function SvgSprite(inputTrees, options) {
 SvgSprite.prototype.build = function() {
     if (this.svgOptions)
         this.svgOptions.dest = this.outputPath;
-    var svgSpriter = new Spriter(this.svgOptions);
+    var svgSpriter = new SVGSpriter(this.svgOptions);
     if ((Array.isArray(this.inputPaths)) && (this.inputPaths.length > 0))
         sourceDirectory = this.inputPaths[0];
     else
@@ -58,15 +56,14 @@ SvgSprite.prototype.build = function() {
     getFilesForSourceDirectory(sourceDirectory, this.options.includeGlob, this.options.excludeGlob).forEach(function(fileSpec) {
         addFilesToSprite(svgSpriter, sourceDirectory, fileSpec);
     });
-    return new RSVP.Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
         svgSpriter.compile(function(error, result, data) {
             if (error)
                 return reject(error);
-            for (var mode in result) {
-                for (var resource in result[mode]) {
-                    var file = result[mode][resource];
-                    mkdirp.sync(path.dirname(file.path));
-                    fs.writeFileSync(file.path, file.contents);
+            for (const mode in result) {
+                for (const resource in result[mode]) {
+                    fs.mkdirSync(path.dirname(result[mode][resource].path), { recursive: true });
+                    fs.writeFileSync(result[mode][resource].path, result[mode][resource].contents);
                 }
             }
             resolve(result);

@@ -1,6 +1,6 @@
 {
   "name": "broccoli-svg-sprite",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "A broccoli.js plugin for generating svg sprites using node.js svg-sprite module by Joschi Kuphal (https://github.com/jkphl/svg-sprite)",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:MojoJojo/broccoli-svg-sprite.git"
-  },
-  "bugs": {
-    "url": "https://github.com/MojoJojo/broccoli-svg-sprite/issues"
+    "url": "git@github.com:feedbackfruits/broccoli-svg-sprite.git"
   },
   "keywords": [
     "broccoli-plugin",
@@ -44,25 +41,17 @@
     "email": "sanket.sharma@dukstra.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/MojoJojo/broccoli-svg-sprite",
+  "homepage": "https://github.com/feedbackfruits/broccoli-svg-sprite",
   "dependencies": {
     "broccoli-caching-writer": "^3.0.0",
-    "glob-array": "^0.1.2",
+    "glob-array": "^1.0.0",
     "glob-to-regexp": "0.0.2",
-    "less": "^3.12.0",
-    "mkdirp": "^0.5.1",
-    "node-sass": "^4.5.0",
-    "path": "^0.11.14",
-    "rimraf": "",
-    "rsvp": "^3.0.18",
-    "stylus": "^0.51.1",
-    "svg-sprite": "^1.2.3",
-    "vinyl": "^0.5.0"
+    "svg-sprite": "^3.0.0-rc2",
+    "vinyl": "^3.0.0"
   },
   "devDependencies": {
     "broccoli": "^0.16.3",
     "coveralls": "*",
-    "glob": "5.0.10",
     "image-diff": "^1.2.0",
     "istanbul": "*",
     "jshint": "^2.8.0",
