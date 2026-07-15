@@ -43,7 +43,7 @@
   "license": "MIT",
   "homepage": "https://github.com/feedbackfruits/broccoli-svg-sprite",
   "dependencies": {
-    "broccoli-caching-writer": "^3.0.0",
+    "broccoli-caching-writer": "^3.1.0",
     "glob-array": "^1.0.0",
     "glob-to-regexp": "0.0.2",
     "svg-sprite": "^3.0.0-rc2",
