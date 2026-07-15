@@ -47,7 +47,7 @@
     "glob-array": "^1.0.0",
     "glob-to-regexp": "0.0.2",
     "svg-sprite": "^3.0.0-rc2",
-    "vinyl": "^3.0.0"
+    "vinyl": "^3.0.1"
   },
   "devDependencies": {
     "broccoli": "^0.16.3",
