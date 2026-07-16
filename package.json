@@ -57,7 +57,7 @@
     "jshint": "^2.8.0",
     "mocha": "",
     "mocha-lcov-reporter": "*",
-    "should": "^7.0.1",
+    "should": "^13.2.3",
     "svg2png": "^1.1.1",
     "walk-sync": "^4.0.2"
   }
