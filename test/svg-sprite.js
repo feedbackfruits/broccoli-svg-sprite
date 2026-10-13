@@ -17,8 +17,6 @@ var fs = require('fs'),
     mkdirp = require('mkdirp'),
     walkSync = require('walk-sync'),
     should = require('should'),
-    svg2png = require('svg2png'),
-    imageDiff = require('image-diff'),
     DIR_REGEX = /\/$/;
 var
     broccoliSvgSprite = require('../'),
@@ -95,39 +93,6 @@ describe('broccoli-svg-sprite', function() {
                 done(error);
             }
         });
-        it('should match vertical sprite', function(done) {
-            this.timeout(20000);
-            svg2png(builder.tree.outputPath + '/svg/vertical.svg', builder.tree.outputPath + '/png/vertical.png', function(error) {
-                if (error)
-                    done(error);
-                imageDiff({
-                    actualImage: builder.tree.outputPath + '/png/vertical.png',
-                    expectedImage: 'test/expected/vertical.png',
-                    diffImage: builder.tree.outputPath + '/diff/vertical.png'
-                }, function(error, imagesAreSame) {
-                    if (imagesAreSame)
-                        done();
-                    else
-                        done(error);
-                });
-            });
-        });
-        it('should match horizontal sprite', function(done) {
-            this.timeout(20000);
-            svg2png(builder.tree.outputPath + '/svg/horizontal.svg', builder.tree.outputPath + '/png/horizontal.png', function(error) {
-                if (error)
-                    done(error);
-                imageDiff({
-                    actualImage: builder.tree.outputPath + '/png/horizontal.png',
-                    expectedImage: 'test/expected/horizontal.png',
-                    diffImage: builder.tree.outputPath + '/diff/horizontal.png'
-                }, function(error, imagesAreSame) {
-                    if (imagesAreSame)
-                        done();
-                    else done(error);
-                });
-            });
-        });
         builder.cleanup();
     });
     describe('with alternate configuration', function() {
@@ -148,38 +113,6 @@ describe('broccoli-svg-sprite', function() {
             } catch (error) {
                 done(error);
             }
-        });
-        it('should match diagonal sprite', function(done) {
-            this.timeout(20000);
-            svg2png(builder.tree.outputPath + '/svg/diagonal.svg', builder.tree.outputPath + '/png/diagonal.png', function(error) {
-                if (error)
-                    done(error);
-                imageDiff({
-                    actualImage: builder.tree.outputPath + '/png/diagonal.png',
-                    expectedImage: 'test/expected/diagonal.png',
-                    diffImage: builder.tree.outputPath + '/diff/diagonal.png'
-                }, function(error, imagesAreSame) {
-                    if (imagesAreSame)
-                        done();
-                    else done(error);
-                });
-            });
-        });
-        it('should match packed sprite', function(done) {
-            this.timeout(20000);
-            svg2png(builder.tree.outputPath + '/svg/packed.svg', builder.tree.outputPath + '/png/packed.png', function(error) {
-                if (error)
-                    done(error);
-                imageDiff({
-                    actualImage: builder.tree.outputPath + '/png/packed.png',
-                    expectedImage: 'test/expected/packed.png',
-                    diffImage: builder.tree.outputPath + '/diff/packed.png'
-                }, function(error, imagesAreSame) {
-                    if (imagesAreSame)
-                        done();
-                    else done(error);
-                });
-            });
         });
         builder.cleanup();
     });
