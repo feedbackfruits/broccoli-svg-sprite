@@ -1,4 +1,4 @@
-name: zizmor GitHub Actions security analysis
+name: lint-github-actions
 
 on:
   push:
@@ -26,3 +26,10 @@ jobs:
           advanced-security: false
           min-severity: high
           min-confidence: high
+
+      - run: gh extension install github/gh-actions-lock --pin v0.4.1
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: gh actions-lock --verify
+        env:
+          GH_TOKEN: ${{ github.token }}
