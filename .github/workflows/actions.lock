@@ -6,7 +6,7 @@ workflows:
     '.github/workflows/broccoli-svg-sprite.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/setup-node@v7.0.0'
-    '.github/workflows/zizmor.yml':
+    '.github/workflows/lint-github-actions.yml':
         - 'actions/checkout@v7.0.1'
         - 'zizmorcore/zizmor-action@v0.8.1'
 dependencies:
